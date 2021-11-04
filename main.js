@@ -28,7 +28,7 @@ const collab = [
     {
         name: 'Barbara Ramos',
         role: 'Graphic Designer',
-        profile: 'img/barbara-ramos-graphic-designer.jpg',
+        profile: '/barbara-ramos-graphic-designer.jpg',
     },
 ];
 
@@ -36,5 +36,30 @@ console.table(collab);
 
 //2 stampo a schermo sotto forma di card
 
+//2.1 cerco dove inserire le card
 
+const teamContainer = document.querySelector('.team-container');
+
+//2.2 creo le card e le mostro in HTML
+
+createCollabs(collab, teamContainer);
+
+function createCollabs(collab, teamContainer) {
+    for(let i = 0; i < collab.length; i++) {
+        const teamCard = collab[i];
+
+        teamContainer.innerHTML +=
+        `<div class="team-card">
+            <div class="card-image">
+               ${teamCard.profile}
+            </div>
+            <div class="card-text">
+                ${teamCard.name}
+                <div>
+                ${teamCard.role}
+                </div>
+            </div>
+        </div>`;
+    }
+}
 
