@@ -2,33 +2,39 @@
 
 const collab = [
     {
+        name: 'Wayne Barnett',
+        role: 'Founder & CEO',
+        profile: "wayne-barnett-founder-ceo.jpg",
+     },
+
+    {
        name: 'Angela Caroll',
        role: 'Chef Editor',
-       profile: 'img/angela-caroll-chief-editor.jpg',
+       profile: "angela-caroll-chief-editor.jpg",
     },
 
     {
         name: 'Walter Gordon',
         role: 'Office Manager',
-        profile: 'img/walter-gordon-office-manager.jpg',
+        profile: 'walter-gordon-office-manager.jpg',
     },
 
     {
         name: 'Angela Lopez',
         role: 'Social Media Manager',
-        profile: 'img/angela-lopez-social-media-manager.jpg',
+        profile: 'angela-lopez-social-media-manager.jpg',
     },
 
     {
         name: 'Scott Estrada',
         role: 'Developer',
-        profile: 'img/scott-estrada-developer.jpg',
+        profile: 'scott-estrada-developer.jpg',
     },
 
     {
         name: 'Barbara Ramos',
         role: 'Graphic Designer',
-        profile: '/barbara-ramos-graphic-designer.jpg',
+        profile: "barbara-ramos-graphic-designer.jpg",
     },
 ];
 
@@ -44,22 +50,61 @@ const teamContainer = document.querySelector('.team-container');
 
 createCollabs(collab, teamContainer);
 
+
+
+//3 Aggiunta di nuovi membri
+
+const addBtn = document.getElementById('addMemberButton');
+const nameInput = document.getElementById('name');
+const roleInput = document.getElementById('role');
+const imageInput = document.getElementById('image');
+
+addBtn.addEventListener('click', () => {
+
+    const newMember = genNewTeamMember(nameInput, roleInput, imageInput);
+
+    collab.push(newMember);
+
+    createCollabs(collab, teamContainer);
+
+
+})
+
 function createCollabs(collab, teamContainer) {
+
+    teamContainer.innerHTML = '';
+
     for(let i = 0; i < collab.length; i++) {
         const teamCard = collab[i];
 
         teamContainer.innerHTML +=
         `<div class="team-card">
             <div class="card-image">
-               ${teamCard.profile}
+            <img
+                src="img/${teamCard.profile}"
+                alt=">${teamCard.name}"
+              />
             </div>
             <div class="card-text">
-                ${teamCard.name}
+                <h3>${teamCard.name}</h3>
                 <div>
-                ${teamCard.role}
+                <p>${teamCard.role}</p>
                 </div>
             </div>
         </div>`;
     }
 }
 
+function genNewTeamMember(name, role, image) {
+    const newTeamMember = {
+        name: name.value,
+        role: role.value,
+        profile: image.value,
+    };
+
+    name.value = '';
+    role.value = '';
+    image.value = '';
+
+    return newTeamMember;
+}
